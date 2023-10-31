@@ -1,8 +1,10 @@
 package com.blog.app.controller;
 
 import com.blog.app.dto.PostDto;
+import com.blog.app.entities.Post;
 import com.blog.app.help.PageableResponse;
 import com.blog.app.services.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +33,9 @@ public class PostController {
     @GetMapping("/{postId}")
     public ResponseEntity<PostDto> getPost(@PathVariable String postId)
     {
-        PostDto post = postService.getPost(postId);
-        return ResponseEntity.ok(post);
+        Post post = postService.getPost(postId);
+        PostDto postDto = new ModelMapper().map(post, PostDto.class);
+        return ResponseEntity.ok(postDto);
     }
     @GetMapping()
     public ResponseEntity<PageableResponse> getAllPost(@RequestParam(name = "pageNumber",defaultValue ="0",required = false) String pageNumber,

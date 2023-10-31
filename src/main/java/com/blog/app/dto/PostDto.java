@@ -8,19 +8,22 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 public class PostDto {
     private String postId;
     private String title;
     private String content;
     private String imageName;
     private Date addedDate;
-    private User user;
-    private Category category;
+    private UserDto user;
+    private CategoryDto category;
+    private List<CommentDto> comments=new ArrayList<>();
 }

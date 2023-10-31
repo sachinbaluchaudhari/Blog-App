@@ -56,9 +56,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDto getPost(String postId) {
+    public Post getPost(String postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post not found with given id!!"));
-        return mapper.map(post,PostDto.class);
+        //return  mapper.map(post,PostDto.class);
+        return post;
     }
 
     @Override

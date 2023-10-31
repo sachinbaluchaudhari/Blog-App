@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 @Entity
 @Table(name = "Users")
 public class User {
@@ -24,7 +23,11 @@ public class User {
     private String email;
     private String password;
     private String about;
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER,orphanRemoval = true)
-   @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.LAZY,orphanRemoval = true)
+    @JsonIgnore
     private List<Post> posts=new ArrayList<>();
+    @OneToMany(mappedBy = "user" )
+    @JsonIgnore
+    private List<Comment> comments=new ArrayList<>();
+
 }
